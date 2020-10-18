@@ -7,6 +7,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import SessionFactoryCreate.FactoryCreate;
 
+import java.util.Iterator;
 import java.util.List;
 
 public class Mains {
@@ -22,14 +23,15 @@ public class Mains {
         SessionFactory factory = create.createFactory();
 
         Session session = factory.openSession();
-        Query query = session.createQuery("from CarsClass as u");
-        List<CarsClass> list = query.list();
+        Query query = session.createQuery("Select sum(cars.cost), cars.model " +
+                " from CarsClass as cars " +
+                " group by cars.model");
 
-        for(CarsClass cars : list){
-            System.out.println(cars.model);
+        Iterator iterator = query.iterate();
+        while (iterator.hasNext()){
+            Object[] row = (Object[]) iterator.next();
+            System.out.print(row[0] + " ");
+            System.out.println(row[1]);
         }
-
-
-
     }
 }
