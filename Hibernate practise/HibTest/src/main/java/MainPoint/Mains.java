@@ -17,21 +17,19 @@ public class Mains {
         CarsHelper helper = new CarsHelper();
 
         CarsClass car = new CarsClass();
-        car.setAllParam(7, "Forma", 73000);
+        car.setAllParam(10, "Topa", 66000);
 
         SessionFactory factory = create.createFactory();
+
         Session session = factory.openSession();
+        Query query = session.createQuery("from CarsClass as u");
+        List<CarsClass> list = query.list();
 
-        Query query = session.createQuery("from CarsClass WHERE cost =: cost");
-        query.setParameter("cost", 1200);
-        List list = query.list();
-
-        
-        for(Object cars :list){
-            System.out.println(((CarsClass) cars).model);
+        for(CarsClass cars : list){
+            System.out.println(cars.model);
         }
 
 
-        System.out.println("End work");
+
     }
 }
