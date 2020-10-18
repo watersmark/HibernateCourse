@@ -20,14 +20,14 @@ public class CarsHelper {
 
     public void getCarinUd(int id, SessionFactory factory) {
         try (Session session = factory.openSession()) {
-            session.get(CarsClass.class, id);
+            CarsClass car = session.get(CarsClass.class, id);
             session.close();
+
+            System.out.println(car.model);
 
         } catch (Exception e) {
             e.printStackTrace();
 
-        } finally {
-            System.out.println("Finally part");
         }
 
     }
