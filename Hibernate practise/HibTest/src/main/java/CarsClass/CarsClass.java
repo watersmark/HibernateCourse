@@ -1,5 +1,7 @@
 package CarsClass;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -7,6 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "cars")
+@DynamicUpdate
 public class CarsClass {
 
     @Id

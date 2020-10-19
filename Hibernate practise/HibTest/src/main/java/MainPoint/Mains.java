@@ -22,16 +22,13 @@ public class Mains {
 
         SessionFactory factory = create.createFactory();
 
-        Session session = factory.openSession();
-        Query query = session.createQuery("Select sum(cars.cost), cars.model " +
-                " from CarsClass as cars " +
-                " group by cars.model");
+        for (int i = 0; i < 2000; i++) {
 
-        Iterator iterator = query.iterate();
-        while (iterator.hasNext()){
-            Object[] row = (Object[]) iterator.next();
-            System.out.print(row[0] + " ");
-            System.out.println(row[1]);
+
         }
+
+
+        System.out.println("End programm");
+
     }
 }

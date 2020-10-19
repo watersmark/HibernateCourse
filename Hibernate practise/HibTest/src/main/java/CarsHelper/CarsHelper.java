@@ -79,8 +79,40 @@ public class CarsHelper {
 
         session.getTransaction().commit();
         session.close();
+    }
 
+    // Обновляем поля по id
+    public void updateCarID(SessionFactory factory, int id, String model){
+
+        Session session = factory.openSession();
+        session.beginTransaction();
+
+        CarsClass cars = session.get(CarsClass.class, id);
+        cars.model = model;
+        session.save(cars);
+
+        session.getTransaction().commit();
+
+        session.close();
 
     }
+
+    // Обновлем поля с помощью HQL
+    public void updateCarHql(SessionFactory factory, int id, String model){
+        Session session = factory.openSession();
+        session.beginTransaction();
+
+        Query query = session.createQuery("update CarsClass as cs set cs.model =: param1" +
+                " where cs.id =: param2");
+        query.setParameter("param1", model);
+        query.setParameter("param2", id);
+
+        int res = query.executeUpdate();
+
+        session.getTransaction().commit();
+        session.close();
+
+    }
+
 
 }
