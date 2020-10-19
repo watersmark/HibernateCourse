@@ -1,10 +1,9 @@
 package CarsClass;
 
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.Generated;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 
 @Entity
@@ -13,7 +12,10 @@ import javax.persistence.Table;
 public class CarsClass {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     public int idCar;
+
+    @Column(name = "modeles")
     public String model;
     public int cost;
 

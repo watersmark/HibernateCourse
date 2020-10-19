@@ -2,11 +2,14 @@ package MainPoint;
 
 import CarsClass.CarsClass;
 import CarsHelper.CarsHelper;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import SessionFactoryCreate.FactoryCreate;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
 import java.util.Iterator;
 import java.util.List;
 
@@ -22,24 +25,22 @@ public class Mains {
 
         SessionFactory factory = create.createFactory();
 
-        for (int i = 0; i < 2000; i++) {
-            Session session = factory.openSession();
-            session.beginTransaction();
-            CarsClass carNew = new CarsClass();
+        Session session = factory.openSession();
+        session.beginTransaction();
 
-            carNew.setAllParam(i, "Porsh", 1200000);
+        CarsClass car1 = new CarsClass();
+        car1.setAllParam(155, "Toyota", 780_000);
 
-            session.save(carNew);
+        CarsClass car2 = session.get(CarsClass.class, 48);
+        car2.model= "Pejo";
 
-            if(i % 100 == 0) session.flush();
+        session.save(car1);
+        session.save(car2);
 
-            session.getTransaction().commit();
-            session.close();
-
-        }
+        session.getTransaction().commit();
+        session.close();
 
 
         System.out.println("End programm");
-
     }
 }
