@@ -23,7 +23,18 @@ public class Mains {
         SessionFactory factory = create.createFactory();
 
         for (int i = 0; i < 2000; i++) {
+            Session session = factory.openSession();
+            session.beginTransaction();
+            CarsClass carNew = new CarsClass();
 
+            carNew.setAllParam(i, "Porsh", 1200000);
+
+            session.save(carNew);
+
+            if(i % 100 == 0) session.flush();
+
+            session.getTransaction().commit();
+            session.close();
 
         }
 
